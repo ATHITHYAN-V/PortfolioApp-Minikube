@@ -52,7 +52,7 @@ Make sure Docker Desktop is running before executing this.
 
 ## 📁 1. Create a pod YAMl
 ## mypod.yaml
-
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -65,6 +65,8 @@ spec:
     image: athithyan402/hosted-docker-website:latest
     ports:
     - containerPort: 80
+```
+
    
 ## Apply the pod:
 
@@ -72,7 +74,7 @@ spec:
  
 ## 🌐 2. Create a Service YAML
 ## service.yaml
-
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -84,14 +86,14 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    
+```
 ## Apply the service:
 
 - kubectl apply -f service.yaml
 
   ## 📁 3. Create a Deployment YAML
 ## deployment.yaml
-
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -111,6 +113,7 @@ spec:
         image: athithyan402/hosted-docker-website:latest
         ports:
         - containerPort: 80
+```
 ## Apply the deployment:
 
 - kubectl apply -f deployment.yaml
