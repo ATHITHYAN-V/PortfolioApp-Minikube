@@ -15,14 +15,15 @@ Deploy and manage apps in Kubernetes using Minikube and `kubectl`.
 
 ## 📦 Step-by-Step Implementation
 ### ✅ 1. Install Minikube
-✅ Step-by-Step Guide to Install Minikube via CMD
+Step-by-Step Guide to Install Minikube via CMD:
+
 1. Open CMD as Administrator
 Press Win + X → Choose Command Prompt (Admin) or search cmd, right-click, and choose Run as administrator.
 
 2. Install Chocolatey (if not already installed)
 Chocolatey is a package manager for Windows. If you don’t have it:
 
-## - @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+- @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
 Close and reopen CMD after installation.
 
@@ -45,6 +46,8 @@ Close and reopen CMD after installation.
 
 - minikube start --driver=docker
 
+  ![3](https://github.com/user-attachments/assets/87129b74-dc4c-416b-9fb5-a5cf840140cf)
+
 Make sure Docker Desktop is running before executing this.
 
 ## 📁 1. Create a pod YAMl
@@ -66,8 +69,27 @@ spec:
 ## Apply the pod:
 
 - kubectl apply -f mypod.yaml
+ 
+## 🌐 2. Create a Service YAML
+## service.yaml
 
-## 📁 2. Create a Deployment YAML
+apiVersion: v1
+kind: Service
+metadata:
+  name: portfolio-service
+spec:
+  type: NodePort
+  selector:
+    app: portfolio
+  ports:
+  - port: 80
+    targetPort: 80
+    
+## Apply the service:
+
+- kubectl apply -f service.yaml
+
+  ## 📁 3. Create a Deployment YAML
 ## deployment.yaml
 
 apiVersion: apps/v1
@@ -92,25 +114,6 @@ spec:
 ## Apply the deployment:
 
 - kubectl apply -f deployment.yaml
- 
-## 🌐 3. Create a Service YAML
-## service.yaml
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: portfolio-service
-spec:
-  type: NodePort
-  selector:
-    app: portfolio
-  ports:
-  - port: 80
-    targetPort: 80
-    
-## Apply the service:
-
-- kubectl apply -f service.yaml
   
 ## 🔍 4. Verify Pods and Services
 ## Check pods:
