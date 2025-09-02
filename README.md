@@ -182,5 +182,3 @@ Get the NodePort:
 ## Open your browser and navigate to:
 
 - http://192.168.49.2:31538
-
-![10](https://github.com/user-attachments/assets/8fa4daeb-8194-41cb-afcc-71399f51a887)
